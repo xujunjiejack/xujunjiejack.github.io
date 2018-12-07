@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='https://unpkg.com/intersection-observer@0.5.0/intersection-observer.js'></script>
+    <script src='https://unpkg.com/scrollama'></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" href="storytelling.css" >
+    <link rel="stylesheet" href="vis3/vis3.css">
+
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.2.0/dist/leaflet.css'>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700" rel="stylesheet">
+
+
+
+</head>
+<body>
+
+<section id='scroll'>
+    <!--  graphic container  -->
+    <!--<div class='scroll__graphic'>-->
+    <div class="container-fluid">
+        <!--   actual graphic/chart   -->
+        <div class='chart'>
+
+            <div class="textarea" id="t1">
+            <h1 class="headline text-center">The Impatient List</h1>
+            <h2 class="subtitle text-center"> What would it be like to be waiting for a kidney transplant in the United States</h2>
+            <h3 class="author text-center"> By Kuhu, Het, Tony, JJ </h3>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="intro_text" style="vertical-align: center; height: 700px" >
+
+            <p class="text-center">
+                More than 114,000 Americans eligible for organ transplants are waiting for a donation, with 80% of them waiting for a kidney transplant.
+            </p>
+
+            <p class="text-center">
+                Kidneys filter and remove excess waste, minerals and fluid from the blood. When your kidneys lose this filtering ability due to, for example, diabetes, harmful levels of fluid and waste accumulate in your body. Your blood pressure will then raise and result in kidney failure. When the kidneys have lost about 90 percent of their ability, end-stage kidney disease occurs.
+
+                When your kidneys fail, kidney transplantation is one of two ways to replace the work your own kidneys can no longer do. Compared to its alternative, dialysis, kidney transplant offers more freedom and better quality of life.
+            </p>
+
+            <p class="text-center">
+                However, getting a transplantation is not easy.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="scroll__graphic sticky" style="width: 100%; height: 349px;">
+        <div class="overlay">
+            <div class="chart2" id="map" style="width: 100%; height: 100vh;">
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--  step/text container  -->
+    <div class='scroll__text'>
+        <div class='box step' data-step='1'>
+          <div class="card">
+            <p>
+                To receive a transplant, you must first register yourself on the waitlist of a transplant center.
+            </p>
+          </div>
+
+        </div>
+
+        <div class='box step' data-step='2'>
+          <div class="card">
+            <p>Since Kidney Transplant can be time sensitive, it is best for you to choose the ones adajacent to where you live.</p>
+            <p style="text-align:center"> Enter Your Zipcode </p>
+            <p style="text-align:center">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-5">
+                    <input id="zip" class="form-control form-control-sm"  value="30318" type="text" >
+                </div>
+                <div class="col-lg-1"><button type="button" id="problemsubmit" class="btn btn-secondary btn-sm"><i class="fas fa-location-arrow"></i></button></div>
+                <div class="col-lg-3"></div>
+            </div>
+            </p>
+          </div>
+
+            <!-- img -->
+            <!-- <img src="" alt=""> -->
+        </div>
+
+        <div class='box step' data-step='3'>
+          <div class="card">
+            <p>
+                Currently, your state has <span style="color: red;"> 4,123</span> patients like you, waiting for a kidney transplant. <span style="color: red;">42% </span> of them have already been waiting for over <span style="color: red;">2 years</span>
+
+                <br>
+                <br>
+                The situation is even worst in other parts of the country.
+            </p>
+          </div>
+
+            <!-- img -->
+            <!-- <img src="" alt=""> -->
+        </div>
+
+        <div class='box step' data-step='4'>
+          <div class="card">
+            <h3>Georgia</h3>
+            <p>
+
+                Georgia has <span style="color: red;"> 4,796</span> waiting for a kidney transplant. <span style="color: red;">39% </span> of them have already been waiting for over <span style="color: red;">3 years</span>.
+
+            </p>
+          </div>
+
+            <!-- img -->
+            <!-- <img src="" alt=""> -->
+        </div>
+        <div class='box step' data-step='5'>
+          <div class="card">
+            <h3>California</h3>
+            <p>
+                California has the longest waiting list of <span style="color: red;">19,723</span> patients, which is the highest in the nation even after population is considered. <span style="color: red;">44%</span> of those patients have been waiting for over <span style="color: red;">3 years</span>.
+            </p>
+          </div>
+
+            <!-- img -->
+            <!-- <img src="" alt=""> -->
+        </div>
+        <div class='box step' data-step='6'>
+          <div class="card">
+            <h3>Alabama</h3>
+            <p>
+                Alabama’s patients tend to wait the longest, with <span style="color: red;">63%</span> of them staying on the waitlist for over <span style="color: red;">3 years</span>, almost twice the amount of the national average <span style="color: red;">(34%)</span>.
+            </p>
+          </div>
+
+
+        </div>
+        <div class='box step' data-step='7' id="bg-toggles">
+          <div class="card" id="card-toggles">
+            <p>
+              Waitlist length is only part of the story, since different states have different populations and donor registration rates. In addition, donors and recipients need to have compatible blood types, and similar body size (BMI).<br><br>
+
+              What if we consider the ratio between the waitlist and donors for each state, and separate the results by blood type & BMI?
+            </p><br><br>
+
+            <div class="row">
+                <div class="btn-group btn-group-1" id="blood_button">
+                    <button type="button" value="ABO" name="blood" class="btn btn-secondary btn-sm active" >All</button>
+                    <button type="button" value="A" name="blood" class="btn btn-secondary btn-sm">A</button>
+                    <button type="button" value="B" name="blood" class="btn btn-secondary btn-sm">B</button>
+                    <button type="button" value="O" name="blood" class="btn btn-secondary btn-sm">O</button>
+                    <button type="button" value="AB" name="blood" class="btn btn-secondary btn-sm">AB</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="btn-group btn-group-2" id="bmi_button">
+                    <button type="button" value="0" name="bmi" class="btn btn-secondary btn-sm active">All</button>
+                    <button type="button" value="1" name="bmi" class="btn btn-secondary btn-sm">18.5</button>
+                    <button type="button" value="2" name="bmi" class="btn btn-secondary btn-sm">18.5-25</button>
+                    <button type="button" value="3" name="bmi" class="btn btn-secondary btn-sm">25-30</button>
+                    <button type="button" value="4" name="bmi" class="btn btn-secondary btn-sm">30-35</button>
+                    <button type="button" value="5" name="bmi" class="btn btn-secondary btn-sm">35-50</button>
+                    <button type="button" value="6" name="bmi" class="btn btn-secondary btn-sm">50+</button>
+                </div>
+            </div>
+            <div id="slider"></div>
+          </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<div class="transition" style="height: 1000px; background: #fcfbfb">
+    <div class="vis_transition"  >
+
+        You might have noticed that in general, the waitlist length grows much faster
+            than the donor numbers. How did the waitlist develop into this situation today?
+
+
+    </div>
+</div>
+
+<section id='scroll2'>
+
+    <div class="scroll__graphic sticky" style="width: 100%; height: 349px;">
+        <div class="overlay"  >
+
+                <div id="vis3">
+                    <row class="d-flex justify-content-center">
+                        <div id = "main" style="transform: translate(0px,0px)" >
+                            <canvas id="canvas" width="1200" height="600" style="border:0px solid #000000;" ></canvas>
+                        </div>
+                    </row>
+                    <row class="d-flex justify-content-center">
+                    <div style="padding: 4px 60px;";>
+                        <!--<label for="yearSlider" style="margin-right:6px;">1995</label>-->
+                        <!--<input id="yearSlider" type="text" data-slider-min="1995" data-slider-max="2017" data-slider-step="1" data-slider-value="1995" style="width: 800px;"/>-->
+                        <!--<label for="yearSlider"  style="margin-left:6px;">2017</label>-->
+
+                        <!--<button type="button" id="animatonButton" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">-->
+                        <!--Single toggle-->
+                        <!--</button>-->
+                        <svg id = "vis3_svg" height="150" width="1000">
+
+                        </svg>
+                    </div>
+                        </row>
+                </div>
+
+        </div>
+    </div>
+
+    <div class='scroll__text' style="padding: 1rem 1rem; ">
+        <div class='boxvis3 step' data-step='1'>
+        </div>
+    </div>
+
+
+</section>
+
+<div style="height: 500px">
+
+</div>
+
+<div class="end" style="height: 100vh;">
+
+  <div>
+    <p class="final-CTA">To help 103,202 people on the waitlist, register to be a donor today. One donor could potentially save the lives of 8 people.</p><br><br>
+
+    <a href="https://www.organdonor.gov/register.html"><p style="text-align:center"><button type="button" class="btn btn-sm btn-CTA">Register to be a Donor</button></p></a>
+
+
+  </div>
+
+
+</div>
+
+
+</body>
+
+<!--<script type="module" src="vis3/vis3Experiment.js"></script>-->
+<script type="module" src="storytelling.js"></script>
+
+<!--Bootstrap dependency-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="vis3/regl.js"></script>
+<script src="vis3/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.3/math.js"></script>
+
+
+<!-- Leaflet.js -->
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+<!-- Mapbox -->
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+
+<!--  -->
+<script src='https://unpkg.com/intersection-observer'></script>
+<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+<script src="./js/leaflet-knn.js"></script>
+
+<script src="./js/d3-simple-slider.min.js"></script>
+<script type="text/javascript" src="./js/line.js"></script>
+<script type="text/javascript" src="./js/scatterplot.js"></script>
+<!--<script src="js/main.js"></script>-->
+
+</html>
