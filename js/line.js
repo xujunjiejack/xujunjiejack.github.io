@@ -1,7 +1,7 @@
 function createLineChart(data, selected_center){
 
 var margin = 35;
-var width = 350;
+var width = 430;
 var height = 250;
   console.log(data)
   console.log(selected_center)
@@ -66,14 +66,15 @@ console.log('Min Value:: ' + Math.min.apply(null, list)); // 0
   let lines = svg_line.append('g')
   .attr('class', 'lines');
 
+console.log(data)
 lines.selectAll('.line-group')
   .data(data).enter()
   .append('g')
   .attr('class', 'line-group')  
-  .on("mouseover", function(d, i) {
+  .on("mouseover", function(d, i) { 
       svg_line.append("text")
         .attr("class", "title-text")
-               .style("fill", 'black')      
+        .style("fill", 'black')        
         .text(d.key)
         .attr("text-anchor", "middle")
         .attr("x", (width-margin)/2)
@@ -126,21 +127,22 @@ svg_line.append("g")
   .attr("transform", "rotate(-90)")
   .attr("fill", "#000")
   .text("No.of Patients Waiting")
-  .attr('font-size', '7px');
+  .attr('font-size', '11px');
 
 svg_line.append("text")
-        .attr("x", 100)
-        .attr("y", height-5)
+        .attr("x", 120)
+        .attr("y", 0)
         .attr("fill", "black")
+        .attr("class","myLabel")
         .text("Waiting Time Distribution")
-        .attr('font-size', '11px');
+        .attr('font-size', '14px');
 
 svg_line.append("text")
-        .attr("x", 280)
-        .attr("y", height-10)
+        .attr("x", 330)
+        .attr("y", 210)
         .attr("fill", "black")
         .text("Waiting Time")
-        .attr('font-size', '7px');
+        .attr('font-size', '11px');
 
 
 

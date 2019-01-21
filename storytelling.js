@@ -3,15 +3,13 @@ let $graphic = d3.select('.scroll__graphic');
 let $chart = d3.select('.chart');
 let $text = d3.select('.scroll__text');
 let $step = $text.selectAll('.step');
-
-let info_state = L.control();
-
+var info_state = L.control();
 var IconStyleOne = L.icon({
-            iconUrl: './data/selected_icon.png'
-        });
+    iconUrl: './data/selected_icon.png'
+});
 var IconStyleTwo = L.icon({
-            iconUrl: './data/all_icons.png'
-        });
+    iconUrl: './data/all_icons.png'
+});
 var legend = L.control({position: 'bottomright'});
 
 // initialize the scrollama
@@ -30,7 +28,7 @@ function handleResize() {
     var bodyWidth = d3.select('body').node().offsetWidth;
 
     // $graphic
-        // .style('height', 100  + 'px');
+    // .style('height', 100  + 'px');
 
     //window.innerHeight
 
@@ -46,7 +44,7 @@ function handleResize() {
     $textarea.attr('style', `padding-top: ${chartHeight/2-100}px`);
     console.log(d3.select("textarea"))
     $chart
-        // .style('width', chartWidth + 'px')
+    // .style('width', chartWidth + 'px')
         .style('height', chartHeight * 0.95 + 'px');
 
     // 4. tell scrollama to update new element dimensions
@@ -59,52 +57,52 @@ function handleStepEnter(response) {
     // response = { element, direction, index }
     console.log("Step entering " + response.index)
 
-        $step.classed('is-active', function (d, i) {
-            return i === response.index;
-        })
-        console.log(response.index)
+    $step.classed('is-active', function (d, i) {
+        return i === response.index;
+    })
+    console.log(response.index)
 
-        // update graphic based on step
-        if (response.index === 0) {
-            center_layer.addTo(map);
-            info.remove(map);
-            map.flyTo([37.8, -100], 5);
-        }
-        if (response.index === 1) {
-            map.removeLayer(center_layer);
-            info.addTo(map);
-            subset_layer.addTo(map);
-            map.flyTo(pan_LatLng, 6);
-        }
-        if (response.index === 2) {
+    // update graphic based on step
+    if (response.index === 0) {
+        center_layer.addTo(map);
+        info.remove(map);
+        map.flyTo([37.8, -100], 5);
+    }
+    if (response.index === 1) {
+        map.removeLayer(center_layer);
+        info.addTo(map);
+        subset_layer.addTo(map);
+        map.flyTo(pan_LatLng, 6);
+    }
+    if (response.index === 2) {
 
-            map.removeLayer(subset_layer);
-            info.remove(map);
-            user_state_layer.addTo(map);
-            map.flyTo(pan_LatLng, 6);
-        }
-        if(response.index === 3){
-            map.removeLayer(user_state_layer);
-            georgia_layer.addTo(map);
-            map.flyTo([32.1656, -82.9001], 6);
-        }
-        if(response.index === 4){
-            map.removeLayer(georgia_layer);
-            california_layer.addTo(map);
-            map.flyTo([36.7783, -119.4179], 6);
-        }
-        if(response.index === 5){
-            map.removeLayer(california_layer);
-            alabama_layer.addTo(map);
-            map.flyTo([32.3182,-86.9023], 6);
-        }
-        if(response.index === 6){
-            map.removeLayer(alabama_layer);
-            state_layer.addTo(map);
-            info_state.addTo(map)
-            legend.addTo(map);
-            map.flyTo([37.8, -110], 4);
-        }
+        map.removeLayer(subset_layer);
+        info.remove(map);
+        user_state_layer.addTo(map);
+        map.flyTo(pan_LatLng, 6);
+    }
+    if(response.index === 3){
+        map.removeLayer(user_state_layer);
+        georgia_layer.addTo(map);
+        map.flyTo([32.1656, -82.9001], 6);
+    }
+    if(response.index === 4){
+        map.removeLayer(georgia_layer);
+        california_layer.addTo(map);
+        map.flyTo([36.7783, -119.4179], 6);
+    }
+    if(response.index === 5){
+        map.removeLayer(california_layer);
+        alabama_layer.addTo(map);
+        map.flyTo([32.3182,-86.9023], 6);
+    }
+    if(response.index === 6){
+        map.removeLayer(alabama_layer);
+        state_layer.addTo(map);
+        info_state.addTo(map);
+        legend.addTo(map);
+        map.flyTo([37.8, -110], 4);
+    }
 
     // if (response.index === 4){
     //     stop = false;
@@ -112,34 +110,33 @@ function handleStepEnter(response) {
 }
 
 function handleStepExit(e){
-  if(e.index==0){
-    map.removeLayer(center_layer);
-  }
-  if(e.index==1){
-    info.remove(map);
-    map.removeLayer(subset_layer);
-  }
-  if(e.index==2){
-    map.removeLayer(user_state_layer);
+    if(e.index==0){
+        map.removeLayer(center_layer);
+    }
+    if(e.index==1){
+        info.remove(map);
+        map.removeLayer(subset_layer);
+    }
+    if(e.index==2){
+        map.removeLayer(user_state_layer);
 
-  }
-  if(e.index==3){
-    map.removeLayer(georgia_layer);
-  }
-  if(e.index==4){
-    map.removeLayer(california_layer);
-  }
-  if(e.index==5){
-    map.removeLayer(alabama_layer);
-  }
-  if(e.index==6){
-    map.removeLayer(state_layer)
-    info_state.remove(map)
-    legend.remove(map);
-  }
-  
+    }
+    if(e.index==3){
+        map.removeLayer(georgia_layer);
+    }
+    if(e.index==4){
+        map.removeLayer(california_layer);
+    }
+    if(e.index==5){
+        map.removeLayer(alabama_layer);
+    }
+    if(e.index==6){
+        map.removeLayer(state_layer)
+        info_state.remove(map);
+        legend.remove(map);
+    }
+
 }
-
 
 function handleContainerEnter(response) {
     // response = { direction }
@@ -199,6 +196,8 @@ init2();
 // Scrollama 2
 
 // Resize
+let stopAt100 = false;
+
 function init2() {
     // 1. call a resize on load to update width/height/position of elements
     handleResize2();
@@ -234,13 +233,54 @@ function handleStepEnter2(response) {
     });
 
     if (response.index === 0) {
-        stop = false
+        // still stop
+    } else if (response.index === 1){
+        // move to 2017
+
+        startYear = 2017;
+        updateNumber(startYear);
+        computePointsAndColor();
+        stop=true;
+
+    }  else if (response.index === 2){
+        // change color
+        // stop at 100
+        stop = false;
+        stopAt100 = true;
+
+    }
+    else if (response.index === 3){
+        // Move pixels
+        stopAt100 = false;
+    }
+    else if (response.index === 4){
+        // move to 1995
+        startYear = 1995;
+        updateNumber(startYear);
+        computePointsAndColor();
+        stop=true;
+        document.getElementById("main").className = "vis3part";
+        document.getElementById("vis3_svg_container").className = 'vis3part';
+        document.getElementById("vis3").className = "vis3_container";
+        document.getElementById("pauseButton").className="pauseButtonClass disable";
+    }
+    else if (response.index === 5) {
+        setTimeout(() => { stop=false}, 2);
+        document.getElementById("main").className += ' zoomout';
+        document.getElementById("vis3_svg_container").className += ' zoomout';
+        document.getElementById("vis3").className += ' shiftleft';
+        document.getElementById("pauseButton").className="pauseButtonClass";
     }
 }
 
 function handleStepExit2(response){
 
     console.log(response.index + "step exiting")
+    // if (response.index === 5) {
+    //     document.getElementById("main").className = "vis3part";
+    //     document.getElementById("vis3_svg_container").className = 'vis3part';
+    //     document.getElementById("vis3").className = "vis3_container";
+    // }
 }
 
 function handleContainerEnter2(response) {
@@ -349,7 +389,8 @@ d3.queue()
             transplant_rate_center: +row['Transplant Rate (center)'], transplant_rate_nation: +row['Transplant Rate (nation)'],
             all: +row['All Time'], less_than_30_time: +row['< 30 Days'],days_30_to_90_time: +row['30 to < 90 Days'], days_90_to_6_months_time: +row['90 Days to < 6 Months'],
             months_6_to_1_year_time: +row['6 Months to < 1 Year'], year_1_to_2_time: +row['1 Year to < 2 Years'],year_2_to_3_time: +row['2 Years to < 3 Years'],
-            year_3_to_5_time: +row['3 Years to < 5 Years'],year_5_or_more_time: +row['5 or More Years'],center_code: +row['Center Code']};
+            year_3_to_5_time: +row['3 Years to < 5 Years'],year_5_or_more_time: +row['5 or More Years'],center_code: row['Center Code'], city: row['City'],
+            state: row['State'],county: row['County']};
 
         centerFeatures.push(turf.point([+row['Longitude'], +row['Latitude']], center));
         return center;
@@ -426,8 +467,8 @@ function readyToDraw(error, centers,zipcodes,states,georgia_data,california_data
     });
 
     $("#blood_button > button").on("click", function() {
-      $(".btn-group-1 > .btn").removeClass("active");
-      $(this).addClass("active");
+        $(".btn-group-1 > .btn").removeClass("active");
+        $(this).addClass("active");
         k++;
         var x = {index: 6}
         if(k>=1){
@@ -440,8 +481,8 @@ function readyToDraw(error, centers,zipcodes,states,georgia_data,california_data
     });
 
     $("#bmi_button > button").on("click", function() {
-      $(".btn-group-2 > .btn").removeClass("active");
-      $(this).addClass("active");
+        $(".btn-group-2 > .btn").removeClass("active");
+        $(this).addClass("active");
         k++;
         var x = {index: 6}
         if(k>=1){
@@ -537,17 +578,41 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Organ Transplant Center</h4>' +  (props ?
-        '<b>' + props.center_name + '</b><br />'
-        : 'Hover over a center');
+    this._div.innerHTML = props ? '<b></b>'
+        : '<b>Click a center</b>';
     var ScatterPlotDiv = this._div.appendChild(document.createElement("div"));
     ScatterPlotDiv.className="scatterplot_box";
     var LineChartDiv = this._div.appendChild(document.createElement("div"));
     LineChartDiv.className="linechart_box";
 };
 
-
 function updateMap(myzipcode){
+
+    center_layer.on('mouseover', function (e) {
+        var point = map.latLngToContainerPoint(e.latlng);
+        //console.log(point)
+        var tooltip = d3.select(map.getContainer())
+            .append("div")
+            .attr("class", "center_tooltip")
+            // Calculating according to marker and tooltip size
+            .style("left", point.x + 40 + "px")
+            .style("top", point.y - 60 + "px")
+            .style("position", "absolute")
+            .style("background", "white")
+            .style("opacity", "1")
+            .style("padding", "0 10px")
+            .style("z-index", "999")
+            .style("filter", "url(#drop-shadow)")
+            .html('<p><span style="color: gray;">CENTER NAME</span><br>'+e.layer.feature.properties.center_name+
+                '<br><span style="color: gray;">CITY</span><br>'+ e.layer.feature.properties.city+'<br><span style="color: gray;">COUNTY</span><br>'
+                +e.layer.feature.properties.county+'<br><span style="color: gray;">STATE</span><br>'+e.layer.feature.properties.state+'</p>')
+            .node();
+        //console.log(e.layer.feature.properties);
+    });
+    center_layer.on('mouseout',function(e){
+        //console.log("bye");
+        d3.select(map.getContainer()).select(".center_tooltip").remove();
+    });
 
     var user_latlng = zipcode_data.filter(function(d){
         if(d['zip_code'] == myzipcode) { return d.LatLng; }
@@ -606,7 +671,7 @@ function updateMap(myzipcode){
         createLineChart(new_data,e.layer.feature.properties.center_name);
 
         if(clickedMarker) {
-          clickedMarker.setIcon(IconStyleTwo);
+            clickedMarker.setIcon(IconStyleTwo);
         }
         var layer = e.layer;
         e.layer.setIcon(IconStyleOne);
@@ -616,6 +681,31 @@ function updateMap(myzipcode){
         //d3.select(".scatterplot").remove();
         info.update();
     });*/
+    subset_layer.on('mouseover', function (e) {
+        var point = map.latLngToContainerPoint(e.latlng);
+        //console.log(point)
+        var subset_tooltip = d3.select(map.getContainer())
+            .append("div")
+            .attr("class", "center_tooltip")
+            // Calculating according to marker and tooltip size
+            .style("left", point.x + 40 + "px")
+            .style("top", point.y - 60+ "px")
+            .style("position", "absolute")
+            .style("background", "white")
+            .style("opacity", "1")
+            .style("padding", "0 10px")
+            .style("z-index", "999")
+            .style("filter", "url(#drop-shadow)")
+            .html('<p><span style="color: gray;">CENTER NAME</span><br>'+e.layer.feature.properties.center_name+
+                '<br><span style="color: gray;">CITY</span><br>'+ e.layer.feature.properties.city+'<br><span style="color: gray;">COUNTY</span><br>'
+                +e.layer.feature.properties.county+'<br><span style="color: gray;">STATE</span><br>'+e.layer.feature.properties.state+'</p>')
+            .node();
+        //console.log(e.layer.feature.properties);
+    });
+    subset_layer.on('mouseout',function(e){
+        //console.log("bye");
+        d3.select(map.getContainer()).select(".center_tooltip").remove();
+    });
 
     function stateFilter(feature) {
         if (feature.properties.NAME === last_zipcode_state) return true
@@ -623,18 +713,17 @@ function updateMap(myzipcode){
     user_state_layer = L.geoJson(states_data,{filter: stateFilter, style:style});
 
 }
-
 info_state.onAdd = function (map) {
-     this._div = L.DomUtil.create('div', 'info');
-     this.update();
-     return this._div;
-   };
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
 
-   info_state.update = function (props) {
-      this._div.innerHTML = '<h4>Waitlist to Donor Ratio</h4>' +  (props ?
-         '<b>' + props.NAME + '</b><br />' + props.value + ''
-         : 'Hover over a state');
- };
+info_state.update = function (props) {
+    this._div.innerHTML = '<h4>Waitlist to Donor Ratio</h4>' +  (props ?
+        '<b>' + props.NAME + '</b><br />' + props.value + ''
+        : 'Hover over a state');
+};
 
 function concat(str1,str2,year){
 
@@ -673,10 +762,10 @@ function concat(str1,str2,year){
     state_layer.on('mouseover', function (e) {
         console.log(e.layer.feature.properties)
         info_state.update(e.layer.feature.properties);
-      });
-      state_layer.on('mouseout',function(e){
+    });
+    state_layer.on('mouseout',function(e){
         info_state.update();
-      });
+    });
 
     function getColor(d) {
         return d > 25  ? '#084594' :
@@ -686,8 +775,8 @@ function concat(str1,str2,year){
                         d > 3   ? '#9ecae1' :
                             d > 2   ? '#c6dbef' :
                                 d > 1   ?  '#deebf7' :
-                            d == 0 ? '#d3d9dd':
-                                    '#f7fbff';
+                                    d == 0 ? '#d3d9dd':
+                                        '#f7fbff';
     }
 
     function style(feature) {
@@ -701,22 +790,22 @@ function concat(str1,str2,year){
             fillOpacity: 0.7
         };
     }
-     legend.onAdd = function (map) {
+    legend.onAdd = function (map) {
 
-          var div = L.DomUtil.create('div', 'info legend'),
-              // grades = [0, 10, 20, 50,100,200,300,400],
-              grades= [1, 2, 3, 5, 8, 13, 25],
-              labels = [];
+        var div = L.DomUtil.create('div', 'info legend'),
+            // grades = [0, 10, 20, 50,100,200,300,400],
+            grades= [1, 2, 3, 5, 8, 13, 25],
+            labels = [];
 
-          // loop through our density intervals and generate a label with a colored square for each interval
-          for (var i = 0; i < grades.length; i++) {
-              div.innerHTML +=
-                  '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-          }
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
 
-          return div;
-      };
+        return div;
+    };
 
 }
 
@@ -746,7 +835,7 @@ function concat(str1,str2,year){
 
 let waitingTime = 0;
 
-let startYear = 1995
+let startYear = 1995;
 
 let animated = true;
 let stop = true;
@@ -824,6 +913,19 @@ let flatPoints =  null;
 let yearMarkPosition = {};
 let scaleMarkPosition = {};
 
+let pauseButton = document.getElementById("pauseButton");
+pauseButton.addEventListener("click", ()=>{
+    stop = !stop;
+
+    if (stop) {
+        pauseButton.textContent = "Resume";
+    }else{
+        pauseButton.textContent = "Pause";
+    }
+
+    console.log("Click, Click, Click")
+
+});
 
 let additionStartX = 70;
 let nodePositionArrayLastYear = {
@@ -911,7 +1013,7 @@ let nodePositionArray = {
         cx: 500,
         cy: 400,
         pointNumber: 0,
-        color: "#c0ff5b",
+
         color_rgb: normalizeRGB([99, 174, 229])
     },
 
@@ -923,7 +1025,6 @@ let nodePositionArray = {
         width: 55,
         height: 490,
         pointNumber: 0,
-        color: "#c0ff5b",
         // color_rgb: normalizeRGB([192.0, 255.0, 91.0]),
         color_rgb: normalizeRGB([127.0, 203.0, 222.0]),
         cx: 900,
@@ -980,7 +1081,7 @@ class Point {
     constructor(x, y, color_rgb, currentCategory ) {
         this.currentX = x;
         this.currentY = y;
-        this.color_rgb = color_rgb;
+        this.color_rgb = [color_rgb[0],color_rgb[1],color_rgb[2]] ;
         this.targetX = x;
         this.targetY = y;
         this.currentCategory = currentCategory; // used for locate future color
@@ -988,13 +1089,28 @@ class Point {
         this.futureColor = null; // used for next place
         this.direction = [0,0];
         this.requiredFrame = math.randomInt(100) + 50
-
+        this.colorFadeDirectionUnit = null;
+        this.colorFadeFrame = 40;
     }
 
     computeDirectionVector (){
         this.direction = [this.targetX - this.currentX, this.targetY- this.currentY]
     }
 
+    computeColorVector (){
+        if (this.futureColor === null){
+            return
+        }
+        this.colorFadeDirectionUnit = this.color_rgb.map( (c,i) =>
+            (this.futureColor[i] - this.color_rgb[i])/this.colorFadeFrame
+        )
+    }
+
+    setFutureColor (futureColor) {
+        this.futureColor = [futureColor[0], futureColor[1], futureColor[2]];
+        this.computeColorVector();
+        // console.log(this.colorFadeDirectionUnit)
+    }
 }
 
 // Next step: create a cured square
@@ -1226,8 +1342,6 @@ let populatePointsInRectWL = (p, pAdditions)=>{
     }
 }
 
-
-
 let populateWlPoints = (p, pAdditions, colors)=>{
     let pointCount = 0;
     let r = 1;
@@ -1370,7 +1484,7 @@ let assignRandomPointsToANumber = (sourcePoints, targetPoints, leavingPointPosit
         randomSourcePoint.targetX = t.currentX;
         randomSourcePoint.targetY = t.currentY;
         randomSourcePoint.futureCategory = t.currentCategory
-        randomSourcePoint.futureColor = t.color_rgb;
+        randomSourcePoint.setFutureColor(t.color_rgb);
         randomSourcePoint.computeDirectionVector()
 
         leavingGrey.push( new Point(randomSourcePoint.currentX, randomSourcePoint.currentY,normalizeRGB([230, 230, 230]),randomSourcePoint.name))
@@ -1411,7 +1525,7 @@ let additionToWL = (sourcePoints,  targetPoints, leavingPointSet, wlExtraAdditio
         sourcePoint.targetX = t.currentX;
         sourcePoint.targetY = t.currentY;
         sourcePoint.futureCategory = t.currentCategory;
-        sourcePoint.futureColor = sourcePoint.color_rgb;
+        sourcePoint.setFutureColor(sourcePoint.color_rgb);
         sourcePoint.computeDirectionVector()
         // console.log(targetPoints);
         n++;
@@ -1433,7 +1547,7 @@ let additionToWL = (sourcePoints,  targetPoints, leavingPointSet, wlExtraAdditio
         sourcePoint.targetX = t.currentX;
         sourcePoint.targetY = t.currentY;
         sourcePoint.futureCategory = sourcePoint.currentCategory;
-        sourcePoint.futureColor = sourcePoint.color_rgb;
+        sourcePoint.setFutureColor(sourcePoint.color_rgb);
         sourcePoint.computeDirectionVector()
     }
 
@@ -1443,7 +1557,7 @@ let getEndOfYearWlLength = (nodes) =>
     nodes["wl"].pointNumber + nodes["additions"].pointNumber - nodes["cured"].pointNumber - nodes["died"].pointNumber -
     nodes["deteriorated"].pointNumber - nodes["other"].pointNumber ;
 
-let fontFamily = "Georgia"
+let fontFamily = "Ariel"
 
 class WlLabelController{
 
@@ -1467,12 +1581,17 @@ class WlLabelController{
         this.delta = this.difference/ this.cycleTime;
         this.wlShown = this.lastyearWl;
         this.tickTracker = -1;
+        this.renderLabelContent()
     }
 
     renderLabelContent(){
 
         if (this.tickTracker === cycleTime){
             return
+        }
+
+        if (this.tickTracker === -1){
+            this.label.textContent = `Currently waiting: ${ Math.floor(this.wlShown)}`;
         }
 
         if (this.tickTracker % 30 === 0) {
@@ -1723,6 +1842,10 @@ let computePointsAndColor = () =>{
         nodePositionArray["deteriorated"].pointNumber + nodePositionArray["cured"].pointNumber +
         nodePositionArray["other"].pointNumber}`;
         main.insertAdjacentElement("afterbegin", patientLeftLabel);
+    }else {
+        patientLeftLabel.textContent = `Patients left ${nodePositionArray["died"].pointNumber +
+        nodePositionArray["deteriorated"].pointNumber + nodePositionArray["cured"].pointNumber +
+        nodePositionArray["other"].pointNumber}`;
     }
 
     // Render vertical line onto it
@@ -1750,9 +1873,9 @@ let computePointsAndColor = () =>{
             labelForYear.style.left = `${yearMarkPosition[i]-4}px`;
 
             if (i >= 2015)
-                labelForYear.style.top = `${horizontalLineTop + 10}px`;
+                labelForYear.style.top = `${horizontalLineTop + 14}px`;
             else
-                labelForYear.style.top = `${horizontalLineTop + 3}px`;
+                labelForYear.style.top = `${horizontalLineTop + 6}px`;
 
             labelForYear.setAttribute("id", `${i}_label`);
             labelForYear.style.fontSize = "8px";
@@ -1800,9 +1923,7 @@ let computePointsAndColor = () =>{
         let a = Math.abs(additionNumber - parseInt(markValue[i]));
         if (a < tempMin){
             tempMin = a
-        }else{
-            newMarkValue = markValue.slice(0, i+1);
-            break;
+            newMarkValue.push(markValue[i])
         }
     }
 
@@ -1841,7 +1962,10 @@ let computePointsAndColor = () =>{
             labelForValue.style.fontFamily = fontFamily;
             labelForValue.style.borderWidth= "0px";
             main.insertAdjacentElement("afterbegin", labelForValue );
+        }else{
+            labelForValue .textContent = `${ value }`;
         }
+
     }
 
     let title = document.getElementById("title")
@@ -1859,7 +1983,7 @@ let computePointsAndColor = () =>{
         title.style.height = "100px";
         title.style.fontSize = "40px";
         title.style.borderWidth= "0px";
-        main.insertAdjacentElement("afterbegin", title );
+        main.insertAdjacentElement("afterbegin", title);
     }else{
         title.textContent = `Waiting list change in ${startYear}`
     }
@@ -1867,8 +1991,8 @@ let computePointsAndColor = () =>{
     let wlnumberLabel = document.getElementById("wlnumber")
     if (wlnumberLabel === null){
         wlnumberLabel = document.createElement("div")
-        wlnumberLabel .classList.add("wlnumber")
-        wlnumberLabel .setAttribute("id", "wlnumber")
+        wlnumberLabel.classList.add("wlnumber")
+        wlnumberLabel.setAttribute("id", "wlnumber")
         wlnumberLabel.style.left = `460px`;
         wlnumberLabel.style.top = `170px`;
         wlnumberLabel.style.textAlign = `center`;
@@ -2265,7 +2389,12 @@ let run = (dataset) => {
 
                     let p = props.movingPoints[i];
 
-                    if (props.waitingTime === 40){
+                    if (props.waitingTime >= 40 && (props.waitingTime < (40 + p.colorFadeFrame)) && !stop){
+                        p.color_rgb[0] += p.colorFadeDirectionUnit[0];
+                        p.color_rgb[1] += p.colorFadeDirectionUnit[1];
+                        p.color_rgb[2] += p.colorFadeDirectionUnit[2];
+                        // p.color_rgb = p.futureColor
+                    } else if (props.waitingTime === (40 + p.colorFadeFrame)){
                         p.color_rgb = p.futureColor
                     }
 
@@ -2280,7 +2409,7 @@ let run = (dataset) => {
 
                     else {
                         // let t = math.randomInt(20) + 180;
-                        if ( props.waitingTime >= 100) {
+                        if ( props.waitingTime >= 100 && !stop ) {
                             p.currentX += p.direction[0] / p.requiredFrame;
                             p.currentY += p.direction[1] / p.requiredFrame;
                         }
@@ -2290,7 +2419,6 @@ let run = (dataset) => {
                     a[2*i + 1 + base] = p.currentY
                     // console.log(p.direction[0]/10)
                 }
-                props.waitingTime = props.waitingTime + 1;
 
                 return a
 
@@ -2335,7 +2463,6 @@ let run = (dataset) => {
                     for (let j = 0; j < 3; j++){
                         allColors[ base + 3*i + j ] = props.movingPoints[i].color_rgb[j];
                     }
-
                 }
                 // Calculate
                 return allColors
@@ -2381,23 +2508,26 @@ let run = (dataset) => {
             if (startYear !== 2018)
                 changeSlider(waitingTime);
 
-
         // Update label
         // wlnumberLabel
-        if (wlLabelController !== null){
-            wlLabelController.updateWl();
-            wlLabelController.renderLabelContent();
-        }
 
         if (!stop) {
-            waitingTime += 1;
 
+            if (stopAt100 === true && waitingTime === 99){
+
+            }else{
+                waitingTime += 1;
+                if (wlLabelController !== null){
+                    wlLabelController.updateWl();
+                    wlLabelController.renderLabelContent();
+                }
+            }
         }
 
         // This tells regl to execute the command once for each object
         draw({pointWidth: pointWidth, canvasHeight: canvasHeight, canvasWidth: canvasWidth, time: time, points: points,allPoints: allPoints,
             colors: colors, movingPoints: allPoints.movingPoints, flatPoints: flatPoints, stayPoints:allPoints.stayPoints,
-            movingPointsColors: movingPointsColors, allColors: allColors, waitingTime: waitingTime, animated: animated,
+            movingPointsColors: movingPointsColors, allColors: allColors, waitingTime: waitingTime, animated: animated, stop: stop
         })
     })
 }
