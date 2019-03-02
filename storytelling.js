@@ -389,8 +389,7 @@ d3.queue()
             transplant_rate_center: +row['Transplant Rate (center)'], transplant_rate_nation: +row['Transplant Rate (nation)'],
             all: +row['All Time'], less_than_30_time: +row['< 30 Days'],days_30_to_90_time: +row['30 to < 90 Days'], days_90_to_6_months_time: +row['90 Days to < 6 Months'],
             months_6_to_1_year_time: +row['6 Months to < 1 Year'], year_1_to_2_time: +row['1 Year to < 2 Years'],year_2_to_3_time: +row['2 Years to < 3 Years'],
-            year_3_to_5_time: +row['3 Years to < 5 Years'],year_5_or_more_time: +row['5 or More Years'],center_code: row['Center Code'], city: row['City'],
-            state: row['State'],county: row['County']};
+            year_3_to_5_time: +row['3 Years to < 5 Years'],year_5_or_more_time: +row['5 or More Years'],center_code: +row['Center Code']};
 
         centerFeatures.push(turf.point([+row['Longitude'], +row['Latitude']], center));
         return center;
@@ -398,7 +397,7 @@ d3.queue()
     .defer(d3.csv,'./data/zipcodes_1.csv',function(row){
         return { zip_code: row['zip_code'],LatLng: [+row['latitude'],+row['longitude']], state: row['state_name']};
     })
-    .defer(d3.json,'./data/states.json')
+    .defer(d3.json,'./data/states1.json')
     .defer(d3.json,'./data/shape_GA.geojson')
     .defer(d3.json,'./data/shape_CA.geojson')
     .defer(d3.json,'./data/shape_AL.geojson')
@@ -707,8 +706,18 @@ function updateMap(myzipcode){
         d3.select(map.getContainer()).select(".center_tooltip").remove();
     });
 
-    function stateFilter(feature) {
-        if (feature.properties.NAME === last_zipcode_state) return true
+   function stateFilter(feature) {
+        if (feature.properties.NAME === last_zipcode_state)
+        {   
+            console.log(feature.properties.All_time);
+            console.log(typeof feature.properties.Over_3_years)
+            console.log(feature.properties.Over_3_years* 100)
+            var element_waiting = document.getElementById("waiting");
+            element_waiting.innerHTML = feature.properties.All_time;
+            var element_perce = document.getElementById("perce");
+            element_perce.innerHTML = (feature.properties.Over_3_years * 100).toFixed(3);
+           return true 
+        } 
     }
     user_state_layer = L.geoJson(states_data,{filter: stateFilter, style:style});
 
@@ -721,7 +730,7 @@ info_state.onAdd = function (map) {
 
 info_state.update = function (props) {
     this._div.innerHTML = '<h4>Waitlist to Donor Ratio</h4>' +  (props ?
-        '<b>' + props.NAME + '</b><br />' + props.value + ''
+        '<b>' + props.NAME + '</b><br />' + props.value.slice(0,5) + ''
         : 'Hover over a state');
 };
 
@@ -790,22 +799,27 @@ function concat(str1,str2,year){
             fillOpacity: 0.7
         };
     }
-    legend.onAdd = function (map) {
+   legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend'),
-            // grades = [0, 10, 20, 50,100,200,300,400],
-            grades= [1, 2, 3, 5, 8, 13, 25],
-            labels = [];
+          var div = L.DomUtil.create('div', 'info legend'),
+              // grades = [0, 10, 20, 50,100,200,300,400],
+              ///////////////////////////////////
+              grades= [25, 13, 8, 5, 3, 2, 1],
+              ////////////////////////////////////
+              labels = [];
 
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-
-        return div;
-    };
+          // loop through our density intervals and generate a label with a colored square for each interval
+          for (var i = 0; i < grades.length; i++) {
+              div.innerHTML +=
+                  '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+          }
+          //////////////////////////
+            div.innerHTML += '<br><i style="background:' + getColor(0) + '"></i> ' +
+                  '0';
+        //////////////////////////////
+          return div;
+      };
 
 }
 
