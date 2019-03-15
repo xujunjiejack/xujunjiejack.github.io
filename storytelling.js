@@ -181,8 +181,8 @@ function init() {
         .onStepEnter(handleStepEnter)
 
         .onStepExit(handleStepExit)
-        .onContainerEnter(handleContainerEnter)
-        .onContainerExit(handleContainerExit);
+        //.onContainerEnter(handleContainerEnter)
+        // .onContainerExit(handleContainerExit);
 
     // setup resize event
     window.addEventListener('resize', handleResize);
@@ -216,8 +216,8 @@ function init2() {
         .onStepEnter(handleStepEnter2)
 
         .onStepExit(handleStepExit2)
-        .onContainerEnter(handleContainerEnter2)
-        .onContainerExit(handleContainerExit2);
+        // .onContainerEnter(handleContainerEnter2)
+        // .onContainerExit(handleContainerExit2);
 
     // setup resize event
     window.addEventListener('resize', handleResize2);
