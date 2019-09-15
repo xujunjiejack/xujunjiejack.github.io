@@ -170,7 +170,7 @@ function init() {
     // 3. bind scrollama event handlers (this can be chained like below)
     scroller
         .setup({
-            container: '#scroll', // our outermost scrollytelling element
+            container: document.querySelector('#scroll'), // our outermost scrollytelling element
             graphic: '.scroll__graphic', // the graphic
             text: '.box', // the step container
             step: '.scroll__text .box', // the step elements
@@ -206,7 +206,7 @@ function init2() {
     // 3. bind scrollama event handlers (this can be chained like below)
     scroller2
         .setup({
-            container: '#scroll', // our outermost scrollytelling element
+            container: document.querySelector('#scroll'), // our outermost scrollytelling element
             graphic: '.scroll__graphic', // the graphic
             text: '.scroll__text', // the step container
             step: '.scroll__text .boxvis3', // the step elements
